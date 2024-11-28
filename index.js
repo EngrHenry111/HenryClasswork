@@ -46,7 +46,7 @@
 // const app = express();
 // const port = 3000
  
-// app.use(express.json());
+// app.u se(express.json());
 
 // app.use("/auth", userRoutes)
  
@@ -66,9 +66,9 @@
 
 
 const express = require('express');
-const mongoose = require('mongoose');
-const userRoutes = require("./routes/userRoute")
-const bookRoutes = require("./routes/bookRoutes")
+const mongoose = require('mongoose'); 
+const userRoutes = require("./routes/userRoutes");
+//const bookRoutes = require("./routes/bookRoutes");
  
  
 const app = express();
@@ -76,15 +76,15 @@ const port = 3000
  
 app.use(express.json());
  
-app.use("/auth" , userRoutes)
-app.use("/api", bookRoutes)
+app.use("/auth" , userRoutes);
+// app.use("/api", bookRoutes);
  
  
 mongoose.connect("mongodb://localhost:27017/userAuth")
 .then(() => console.log("MongoDB Connected"))
-.catch(err => console.error("Connection Error: ", err));
+.catch(err => console.error("Connection Error : ", err));
  
  
  
  
-app.listen(port, () => console.log('Server running on port 3000'));
+app.listen(port, () => console.log('Server is up and running on port 3000'));
