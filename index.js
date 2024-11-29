@@ -68,7 +68,7 @@
 const express = require('express');
 const mongoose = require('mongoose'); 
 const userRoutes = require("./routes/userRoutes");
-//const bookRoutes = require("./routes/bookRoutes");
+const bookRoutes = require("./routes/bookRoutes");
  
  
 const app = express();
@@ -77,7 +77,7 @@ const port = 3000
 app.use(express.json());
  
 app.use("/auth" , userRoutes);
-// app.use("/api", bookRoutes);
+app.use("/api", bookRoutes);
  
  
 mongoose.connect("mongodb://localhost:27017/userAuth")
