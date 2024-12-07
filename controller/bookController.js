@@ -1,13 +1,18 @@
 
 const bookModel = require("../model/bookModel")
+const userModel = require("../model/userModel")
 
 exports.createbooks = async(req , res)=>{
+ 
     try {
+      const getUserId = await userModel.findById(req.params.userID)
         const {Title , Discription , Category} = req.body
         
         const newBook = await bookModel.create({
            Title  , Discription , Category
         })
+        getUserId.books.push(newBook._id)
+        await getUserId.save()
         return res.status(201).json({
             message : "these are list of books we have",
             data : newBook
@@ -20,10 +25,16 @@ exports.createbooks = async(req , res)=>{
 
       
       exports.getOne = async(req , res)=>{
+
         try {
           
-            
-          const books = await bookModel.findOne(req.params.id)
+          const {Title} = req.body;
+          if (!Title) {
+            return res.status(404).json({
+              Message: "Title must be use here",
+            });
+           }
+          const books = await bookModel.findOne({Title});
           return res.status(200).json({
             message : "get books by title",
             data : books

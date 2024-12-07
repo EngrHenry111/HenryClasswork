@@ -69,6 +69,7 @@ const express = require('express');
 const mongoose = require('mongoose'); 
 const userRoutes = require("./routes/userRoutes");
 const bookRoutes = require("./routes/bookRoutes");
+const productRoute = require("./routes/productRoute")
  
  
 const app = express();
@@ -78,9 +79,11 @@ app.use(express.json());
  
 app.use("/auth" , userRoutes);
 app.use("/api", bookRoutes);
+app.use("/api", productRoute);
  
- 
-mongoose.connect("mongodb://localhost:27017/userAuth")
+const live_Uri = "mongodb+srv://EngrHenry:engrakpan@cluster.wavse.mongodb.net/myStore?retryWrites=true&w=majority&appName=Cluster"
+const local_Uri = ("mongodb://localhost:27017/userAuth")
+mongoose.connect(live_Uri)
 .then(() => console.log("MongoDB Connected"))
 .catch(err => console.error("Connection Error : ", err));
  

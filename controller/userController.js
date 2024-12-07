@@ -173,8 +173,8 @@
 //   }
 
 
-const userModel = require('../model/userModel');
 const UserModel = require('../model/userModel');
+
 
 //user sign up
 // exports.createUser = async (req, res) => {
@@ -192,27 +192,27 @@ exports.createUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
-    if (!name && !email && !password) {
-      return res.status(400).json({
-        message: 'all fields must be filled',
-      });
-    } else if (!name) {
-      return res.status(400).json({
-        message: 'Please enter your name',
-      });
-    } else if (!email) {
-      return res.status(400).json({
-        message: 'Please enter your email',
-      });
-    } else if (!password) {
-      return res.status(400).json({
-        message: 'Please enter your password',
-      });
-    } else if (!name || !email || !password) {
-      return res.status(400).json({
-        message: 'Please enter your valid info',
-      });
-    }
+    // if (!name && !email && !password) {
+    //   return res.status(400).json({
+    //     message: 'all fields must be filled',
+    //   });
+    // } else if (!name) {
+    //   return res.status(400).json({
+    //     message: 'Please enter your name',
+    //   });
+    // } else if (!email) {
+    //   return res.status(400).json({
+    //     message: 'Please enter your email',
+    //   });
+    // } else if (!password) {
+    //   return res.status(400).json({
+    //     message: 'Please enter your password',
+    //   });
+    // } else if (!name || !email || !password) {
+    //   return res.status(400).json({
+    //     message: 'Please enter your valid info',
+    //   });
+    // }
     const newUser = await UserModel.create({
       name,
       email,
@@ -286,7 +286,7 @@ exports.updateUser = async (req, res) => {
   try {
     const { id } = req.params;
     const { password, name } = req.body;
-    const update = await userModel.findByIdAndUpdate(
+    const update = await UserModel.findByIdAndUpdate(
       id,
       { password, name },
       { new: true }
@@ -307,7 +307,7 @@ exports.updateUser = async (req, res) => {
 //delete method
 exports.deleteUser = async (req, res) => {
   try {
-    const removeUser = await userModel.findByIdAndDelete(req.params.id);
+    const removeUser = await UserModel.findByIdAndDelete(req.params.id);
     return res.status(200).json({
       message: 'user deleted',
       data: removeUser,
