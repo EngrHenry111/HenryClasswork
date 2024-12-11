@@ -67,6 +67,7 @@
 
 const express = require('express');
 const mongoose = require('mongoose'); 
+const cors = require('cors');
 const userRoutes = require("./routes/userRoutes");
 const bookRoutes = require("./routes/bookRoutes");
 const productRoute = require("./routes/productRoute")
@@ -76,11 +77,15 @@ const app = express();
 const port = 3000
  
 app.use(express.json());
- 
+app.use(cors());
 app.use("/auth" , userRoutes);
 app.use("/api", bookRoutes);
 app.use("/api", productRoute);
- 
+
+app.get("/", (req, res)=>{
+    res.send("API is ready for use\nThank you")
+})
+
 const live_Uri = "mongodb+srv://EngrHenry:engrakpan@cluster.wavse.mongodb.net/myStore?retryWrites=true&w=majority&appName=Cluster"
 const local_Uri = ("mongodb://localhost:27017/userAuth")
 mongoose.connect(live_Uri)
