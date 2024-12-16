@@ -2,7 +2,7 @@ const productModel = require("../model/productModel")
 
 
 
-exports.createproduct = async(req , res)=>{
+exports.createProduct = async(req , res)=>{
 
  
     try {
@@ -22,7 +22,7 @@ exports.createproduct = async(req , res)=>{
     } catch (error) {
         console.error("couldn't found products here" , error)
     }
-      }
+      };
 
       exports.getAllProducts = async (req, res) => {
         try {
@@ -74,8 +74,8 @@ exports.createproduct = async(req , res)=>{
       exports.updateProduct = async(req, res)=>{
         try {
           const {id} = req.params
-          const {productName , price} = req.body
-          const updates = await productModel.findByIdAndUpdate(id , {Title , Discription} , {new:true})
+          const {ProductName , Price} = req.body
+          const updates = await productModel.findByIdAndUpdate(id , {ProductName , Price} , {new:true})
           return res.status(202).json({
             message : "product updated",
             data : updates
@@ -84,7 +84,7 @@ exports.createproduct = async(req , res)=>{
           return res.status(400).json({
             message : "failed to update product",
             error
-          })
+          });
         }
-    }
+    };
 
