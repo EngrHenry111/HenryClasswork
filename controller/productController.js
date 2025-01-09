@@ -1,4 +1,5 @@
-const productModel = require("../model/productModel")
+const ProductModel = require("../model/productModel");
+const UserModel = require("../model/userModel")
 
 
 
@@ -6,18 +7,21 @@ exports.createProduct = async(req , res)=>{
 
  
     try {
-      const getUser = await userModel.findById(req.params.userID)
-        const { ProductName, Price , Availability, Category} = req.body
+     const getUser = await  UserModel.findById(req.params.userId)
+        const { ProductName, Price , Availability, Category} = req.body;
         
-        const ProductList = await productModel.create({
-           ProductName, Price, Availability, Category
-        })
-        await getUser.Products.push(ProductList._id)
+        const ProductList = await ProductModel.create({
+          ProductName  ,
+          Price , 
+          Availability ,
+          Category ,
+        });
+         getUser.products.push(ProductList._id)
         await getUser.save()
-       
+        
         return res.status(201).json({
-            message : "these are our products",
-            data : ProductList
+            message : "these are our products", 
+            data : ProductList,
         })
     } catch (error) {
         console.error("couldn't found products here" , error)
@@ -26,7 +30,7 @@ exports.createProduct = async(req , res)=>{
 
       exports.getAllProducts = async (req, res) => {
         try {
-          const Products = await productModel.find();
+          const Products = await ProductModel.find();
           return res.status(200).json({
             message: 'gotten all Products',
             data: Products,
@@ -42,7 +46,7 @@ exports.createProduct = async(req , res)=>{
       exports.getOneById = async (req, res) => {
         try {
        const {id} = res.params
-       const products = await productModel.findById({id});
+       const products = await ProductModel.findById({id});
           return res.status(200).json({
             message: 'gotten products by id',
             data: products,
@@ -58,7 +62,7 @@ exports.createProduct = async(req , res)=>{
      
       exports.deleteProduct = async (req, res) => {
         try {
-          const deleteProduct = await productModel.findByIdAndDelete(req.params.id);
+          const deleteProduct = await ProductModel.findByIdAndDelete(req.params.id);
           return res.status(200).json({
             message: 'products deleted',
             data: deleteProduct,
@@ -75,11 +79,13 @@ exports.createProduct = async(req , res)=>{
         try {
           const {id} = req.params
           const {ProductName , Price} = req.body
-          const updates = await productModel.findByIdAndUpdate(id , {ProductName , Price} , {new:true})
+          const updates = await ProductModel.findByIdAndUpdate(id ,
+             {ProductName , Price} ,
+             {new:true})
           return res.status(202).json({
-            message : "product updated",
-            data : updates
-          })
+          message : "product updated",
+          data : updates
+          });
         } catch (error) {
           return res.status(400).json({
             message : "failed to update product",

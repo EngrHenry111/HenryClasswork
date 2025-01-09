@@ -173,7 +173,7 @@
 //   }
 
 
-const UserModel = require('../model/userModel');
+// const UserModel = require('../model/userModel');
 
 
 //user sign up
@@ -186,6 +186,9 @@ const UserModel = require('../model/userModel');
 //       res.status(400).send(error);
 //     }
 //   };
+
+const UserModel = require('../model/userModel');
+
 
 //post method
 exports.createUser = async (req, res) => {
@@ -212,7 +215,7 @@ exports.createUser = async (req, res) => {
     //   return res.status(400).json({
     //     message: 'Please enter your valid info',
     //   });
-    // }
+    //}
     const newUser = await UserModel.create({
       name,
       email,
@@ -286,8 +289,7 @@ exports.updateUser = async (req, res) => {
   try {
     const { id } = req.params;
     const { password, name } = req.body;
-    const update = await UserModel.findByIdAndUpdate(
-      id,
+    const update = await UserModel.findByIdAndUpdate(id,
       { password, name },
       { new: true }
     );

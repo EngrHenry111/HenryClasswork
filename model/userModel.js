@@ -30,13 +30,15 @@ const userSchema = new mongoose.Schema({
       // maxlength : 12,
       // required : true
       },
-      Products: [
-      {type: mongoose.Schema.Types.ObjectId, ref: "Products"}
+      products: [
+      {type: mongoose.Schema.Types.ObjectId,
+         ref: "Products"},
       ],
 
-      books: [
-        {type: mongoose.Schema.Types.ObjectId, ref: "books"}
-      ]
+      Books: [
+        {type: mongoose.Schema.Types.ObjectId,
+           ref: "Books"},
+      ],
   });
  
  module.exports = mongoose.model('User', userSchema);

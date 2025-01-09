@@ -5,7 +5,7 @@
 // const app = express()
 
 
-// const port = 
+// const port = 3000
 // app.use(express.json());
 
 // mongoose.connect("mongodb://localhost:27017/userAuth", { 
@@ -78,9 +78,9 @@ const port = 3000
  
 app.use(express.json());
 app.use(cors());
-app.use("/auth" , userRoutes);
-app.use("/api", bookRoutes);
-app.use("/api", productRoute);
+app.use("/auth" ,  userRoutes);
+app.use("/books", bookRoutes);
+app.use("/products", productRoute);
 
 app.get("/", (req, res)=>{
     res.send("API is ready for use\nThank you")

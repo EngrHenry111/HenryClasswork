@@ -6,4 +6,4 @@ const userSchema = new mongoose.Schema({
     Category: {type: String},
 })
 
-module.exports = mongoose.model("books", userSchema);
+module.exports = mongoose.model("Books", userSchema);

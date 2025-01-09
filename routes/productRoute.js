@@ -4,7 +4,7 @@ const express = require('express');
 const productRoute = express.Router();
 
 
-productRoute.post('/upload-product', productController.createProduct);
+productRoute.post('/upload-product/:userId', productController.createProduct);
 productRoute.get('/get-all-product', productController.getAllProducts);
 productRoute.get('/get-one-product/:id', productController.getOneById);
 productRoute.delete('/delete-product/:id', productController.deleteProduct);
