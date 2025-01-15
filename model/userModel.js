@@ -30,10 +30,10 @@ const userSchema = new mongoose.Schema({
       // maxlength : 12,
       // required : true
       },
-      products: [
-      {type: mongoose.Schema.Types.ObjectId,
-         ref: "Products"},
-      ],
+      // products: [
+      // { type : mongoose . Schema . Types . ObjectId,
+      //    ref: "Products"},
+      // ],
 
       Books: [
         {type: mongoose.Schema.Types.ObjectId,

@@ -1,23 +1,26 @@
 const ProductModel = require("../model/productModel");
 const UserModel = require("../model/userModel")
-
+const cloudinary = require('../config/cloudinary');
 
 
 exports.createProduct = async(req , res)=>{
 
  
     try {
-     const getUser = await  UserModel.findById(req.params.userId)
-        const { ProductName, Price , Availability, Category} = req.body;
+     //const getUser = await  UserModel.findById(req.params.userId)
+        const { ProductName, Price , Availability, Category ,ProductImage} = req.body;
+        
+        const upload = await cloudinary.uploader.upload(req.file.path);
         
         const ProductList = await ProductModel.create({
           ProductName  ,
           Price , 
           Availability ,
           Category ,
+          ProductImage: upload.secure_url,
         });
-         getUser.products.push(ProductList._id)
-        await getUser.save()
+      //    await getUser.products.push(ProductList._id)
+      //  await getUser.save()
         
         return res.status(201).json({
             message : "these are our products", 

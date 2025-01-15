@@ -8,6 +8,8 @@ const userSchema = new mongoose.Schema({
     Availability:{type: Boolean} ,
 
     Category: {type: String},
+
+    ProductImage: {type: String}
 })
 
 module.exports = mongoose.model("Products", userSchema);
